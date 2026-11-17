@@ -3,6 +3,15 @@
 `intfloat/multilingual-e5-base` modeli bir soru ile üç belgeyi vektöre çevirir ve kosinüs benzerliğiyle sıralar. Soru Türkçedir. Belgelerden biri İngilizcedir; model aynı anlama gelen metni dil değişse de yukarı taşır.
 E5 ailesi kısa sorularda `query: `, belgelerde `passage: ` önekini bekler. Betik bu önekleri ekler, ekrana basarken çıkarır.
 E5 ailesi sorunun başına `query: `, belgenin başına `passage: ` koyulmasını ister. `embedding_test.py` bu önekleri metnin içine yazar, ekrana basarken çıkarır.
+Türkçe bir soruyu üç belgeyle karşılaştırdım. Önce `intfloat/multilingual-e5-base` ile baktım. Sonra aynı cümleleri MiniLM ve `bge-m3` ile de geçirdim.
+## Model karşılaştırması
+| Model Adı | Parametre / Boyut | Lisans | Performans ve Yük |
+| --- | --- | --- | --- |
+| intfloat/multilingual-e5-base | 278M (1,11 GB) | MIT | 768 boyut, en fazla 512 token. Bu denemede Türkçe belge 0,7953 ile birinci oldu. Üç skor da 0,74–0,80 arasında. Vektörleştirme 0,0560 saniye. |
+| sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 | 118M (471 MB) | Apache 2.0 | En hafif model. 384 boyut, en fazla 128 token. Hava cümlesini 0,0300'e indirdi. İngilizce belge 0,4654 ile birinci. |
+| BAAI/bge-m3 | 568M (2,27 GB) | MIT | 1024 boyut, 8192 token. İngilizce belge 0,6639, hava cümlesi 0,4044. Aynı CPU'da daha ağır. |
+E5, sorunun başına `query: `, belgenin başına `passage: ` yazılmasını istiyor. `embedding_test.py` bu önekleri ekliyor. MiniLM ve `bge-m3` önek istemiyor; `karsilastirma.py` onlara düz metni veriyor.
+
 ## Veri
 | Rol | Metin |
 | --- | --- |
