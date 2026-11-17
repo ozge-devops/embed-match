@@ -19,19 +19,3 @@ print(f"Hedef Soru: {soru.replace('query: ', '')}")
 for i, skor in enumerate(skorlar):
     print(f"Doküman {i+1} Skoru: {skor:.4f} | Metin: {dokumanlar[i].replace('passage: ', '')}")
 print(f"\nPerformans: Vektörizasyon işlemi {bitis_zamani - baslangic_zamani:.4f} saniye sürdü.")
-# Çok dilli anlam benzerliği
-`intfloat/multilingual-e5-base` modeli ile bir soruyu belgelere karşı kosinüs benzerliğiyle sıralar. Soru Türkçe, belgelerden biri İngilizce: model çapraz dilde de yakın anlamı yüksek skorlar.
-E5 ailesi kısa sorularda `query: `, belgelerde `passage: ` önekini bekler. Betik bu önekleri ekler, ekrana basarken çıkarır.
-## Kurulum
-GPU olmadığı için CPU tekerleği kullanılır.
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install torch --index-url https://download.pytorch.org/whl/cpu
-pip install -r requirements.txt
-```
-## Çalıştırma
-```bash
-python embedding_test.py
-```
-İlk çalıştırmada model Hugging Face'ten indirilir ve önbelleğe alınır. Sonraki çalıştırma
